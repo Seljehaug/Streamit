@@ -1,0 +1,715 @@
+@import "variables"
+
+// --- GEMERAL STYLES ---
+*
+	margin: 0
+	padding: 0
+	font-family: $roboto
+	box-sizing: border-box
+
+body
+	background-image: url(../img/noisy_net.png)
+	color: $white
+	font-size: 100%
+
+.inner
+	max-width: 1600px
+	width: 100%
+	margin: 0 auto
+
+section:first-of-type
+	margin-top: 80px
+
+h1
+	font-size: 2.5rem
+h2
+	font-size: 1.8rem
+h3
+	font-size: 1.4rem
+h4
+	font-size: 1.2rem
+p,a
+	font-size: 1rem
+
+// --- Icons and logos ---
+.icon
+	display: block
+	padding: 0 0
+	text-indent: -9999px
+	background-size: 100% 100%
+	background-position: center center
+	background-repeat: no-repeat
+	position: relative
+
+// .arrow-next
+// 	background-image: url("../img/icons/arrows.svg")
+// 	height: 100px
+
+// --- NAVBAR ---
+#navbar-wrapper
+	position: fixed
+	top: 0
+	left: 0
+	right: 0
+	height: 80px
+	max-width: 1600px
+	width: 100%
+	margin: 0 auto
+	color: $white
+	background-image: url(../img/noisy_net.png)
+	z-index: 20
+	.nav
+		height: 100%
+		width: 100%
+		padding: 20px 0
+		// background: $black-transparent
+		display: flex
+		align-items: center
+		justify-content: space-between
+		ul
+			display: inline
+			li
+				text-decoration: none
+				margin-left: 20px
+				display: inline
+				// text-transform: uppercase
+				font-weight: 700
+				letter-spacing: 0.1em
+				a
+					color: $white
+					text-decoration: none
+					&:hover
+						color: $green
+						cursor: pointer
+			.link
+				text-transform: uppercase
+			.logo
+				border: 1px solid $green
+				padding: 5px 10px
+				// text-transform: lowercase
+				a
+					color: $green
+
+		.search
+			display: none
+			margin-right: 20px
+			input[type="text"]
+				padding: 5px
+				border: none
+				background: $green
+				border-radius: 10px
+				&::placeholder
+					color: $black
+					letter-spacing: 0.1em
+@media(max-width: 500px)
+	#navbar-wrapper .nav ul
+		li a
+			font-size: 0.8rem
+		.logo
+			margin-left: 10px
+			padding: 5px
+			padding-top: 2px
+
+@media(max-width: 400px)
+	#navbar-wrapper .nav ul .link
+		margin-left: 5px
+		font-size: 0.7rem
+
+// --- INFO ---------------------------------------------------------
+// INFORMATION OVERLAY USED IN BOTH GRID ITEMS AND CAROUSEL ITEMS
+.info
+	position: absolute
+	display: flex
+	flex-direction: column
+	justify-content: center
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	padding: 2rem
+	max-width: 600px
+	width: 100%
+	margin: 0 auto
+	p
+		color: $white
+		line-height: 1.2em
+	.title-text
+		font-size: 1.8rem
+		font-weight: 700
+		margin-bottom: 0.5rem
+	.desc
+		font-size: 1.2rem
+		margin-bottom: 5px
+	.info-bar
+		display: flex
+		margin-top: 5px
+		align-items: center
+		margin-bottom: 20px
+		.age-limit
+			border: 1px solid $green
+			border-radius: 100%
+			padding: 0.5em
+			font-weight: 700
+			font-size: 0.5em
+			margin-right: 10px
+		.duration
+			font-size: 0.8em
+			margin-right: 10px
+		.genre
+			font-size: 0.8em
+
+	.buttons
+		display: flex
+		justify-content: center
+		align-content: center
+	.btn
+		min-width: 20%
+		display: flex
+		align-items: center
+		justify-content: center
+		padding: 1rem
+		border: 2px solid $white
+		background: linear-gradient(to left, transparent 50%, $green 50%)
+		background-size: 200% 100%
+		background-position: right bottom
+		transition: all 0.2s ease-in-out
+		// text-align: center
+		cursor: pointer
+		span
+			text-transform: uppercase
+			font-weight: 700
+			color: $white
+			letter-spacing: 0.025rem
+			font-size: 1rem
+		a
+			text-decoration: none
+			color: $white
+		&:hover
+			border-color: $green
+			background-position: left bottom
+			transition: all 0.2s ease-in-out
+		&:first-child
+			margin-right: 10px
+
+@media(max-width: 900px)
+	.info .btn
+		min-width: 25%
+
+@media(max-width: 700px)
+	.info .btn
+		padding: 0.5rem
+
+@media(max-width: 500px)
+	.info
+		padding: 1rem
+		max-width: 400px
+		margin: 0 auto
+		.title-text
+			font-size: 1.2rem
+			margin-bottom: 0.4rem
+		.desc
+			font-size: 0.8rem
+			margin-bottom: 0.4rem
+		.info-bar
+			margin-top: 0
+			margin-bottom: 0.8rem
+		.btn
+			padding: 0.6rem
+			span
+				font-size: 0.8rem
+
+@media(max-width: 400px)
+	.info
+		// padding: 0.5rem
+		max-width: 380px
+		margin: 0 auto
+		.title-text
+			font-size: 1rem
+			margin-bottom: 0.2rem
+		.desc
+			font-size: 0.7rem
+		.info-bar
+			font-size: 0.7rem
+			margin-bottom: 0.4rem
+// ---- END OF INFO ---------------------------------------------------------
+
+// --- GRID -----------------------------------------------------------------
+// Solution used on movies and tv-shows page
+.grid
+	width: 100%
+
+	// IE fallback
+	display: flex
+	flex-wrap: wrap
+	@supports (display:grid)
+		display: grid
+		grid-template-columns: repeat(6, 1fr)
+		grid-auto-flow: dense
+		align-items: start
+		grid-gap: 0.5rem
+
+.grid-item
+	display: flex
+
+	// IE fallback
+	width: 16.666666666666666666667%
+	@supports (display:grid)
+		width: auto
+
+	align-items: center
+	justify-content: center
+	position: relative
+	cursor: pointer
+	margin-bottom: -5px
+	.bkg-img
+		display: none
+		position: absolute
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		background-position: center center
+		background-repeat: no-repeat
+		background-size: 100% auto
+		background-size: cover
+	img
+		width: 100%
+	.overlay
+		display: none
+		position: absolute
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		background-color: $black-transparent
+
+.grid-item.selected
+	cursor: default
+
+	// IE fallback
+	width: calc(16.6666666667% * 3)
+	@supports (display:grid)
+		width: auto
+		grid-column-end: span 3
+	.img
+		display: none
+	.bkg-img
+		display: block
+	.overlay
+		display: block
+
+@media(max-width: 1000px)
+	.grid
+		@supports (display:grid)
+			grid-template-columns: repeat(4, 1fr)
+	.grid-item
+		// IE fallback
+		width: 25%
+		@supports (display:grid)
+			width: auto
+	.grid-item.selected
+		// IE fallback
+		width: calc(25% * 3)
+		@supports (display:grid)
+			width: auto
+
+@media(max-width: 700px)
+	.grid
+		@supports (display:grid)
+			grid-template-columns: repeat(3, 1fr)
+	.grid-item
+		// IE fallback
+		width: 33.333333333333%
+		@supports (display:grid)
+			width: auto
+	.grid-item.selected
+		// IE fallback
+		width: 100%
+		@supports (display:grid)
+			width: auto
+// --- END OF GRID ------------------------------------------------------------
+
+// --- TITLES-CAROUSELS -------------------------------------------------------
+// Custom OWL 2 Carousel solution
+.titles-overview
+	h2
+		font-size: 1.8rem
+		text-transform: uppercase
+		margin-left: 20px
+		margin-bottom: 10px
+		// padding-left: 10px
+		letter-spacing: .1rem
+		display: inline-block
+		// border-left: 3px solid $green
+	.owl-carousel
+	   width: 100%
+	   margin: 0 auto
+	   margin-bottom: 50px
+
+	@media (min-width: 300px) and (max-width: 699px)
+	   .owl-stage-outer
+	      margin-left: -10px
+
+	.carousel-item
+		display: flex
+		align-items: center
+		justify-content: center
+		position: relative
+		cursor: pointer
+		margin-bottom: -5px
+		// height: 290px
+		.bkg-img
+			display: none
+			position: absolute
+			top: 0
+			left: 0
+			right: 0
+			bottom: 0
+			background-position: center center
+			background-repeat: no-repeat
+			background-size: 100% auto
+			background-size: cover
+		img
+			width: 100%
+		.overlay
+			display: none
+			position: absolute
+			top: 0
+			left: 0
+			right: 0
+			bottom: 0
+			background-color: $black-transparent
+
+	.carousel-item.selected
+		cursor: default
+		.img
+			display: none
+		.bkg-img
+			display: block
+		.overlay
+			display: block
+
+@media(max-width: 600px)
+	.titles-carousels .info
+		max-width: 500px
+		// margin: 0 auto
+		padding: 1rem 2rem
+
+@media(max-width: 500px)
+	.titles-carousels h2
+		font-size: 1.2rem
+		margin-left: 10px
+	.toggle-close
+		font-size: 1.5rem!important
+		top: 0.25rem!important
+		right: -1rem!important
+	.titles-carousels .info
+		max-width: 450px
+
+@media(max-width: 450px)
+	.titles-carousels .info
+		max-width: 400px
+
+@media(max-width: 400px)
+	.titles-carousels .info
+		max-width: 350px
+
+@media(max-width: 350px)
+	.titles-carousels .info
+		// max-width: 300px
+
+// --- Carousel navigation ---
+.owl-nav
+	background: $black
+.owl-nav > div
+	background: $black
+	i
+		color: $green
+
+.toggle-close
+	display: none
+	font-size: 1.8rem
+	position: absolute
+	top: 1rem
+	right: 1rem
+
+@media(min-width: 700px)
+	.owl-nav > div
+		position: absolute
+		top: 0
+		bottom: 0
+		width: 60px
+		display: flex
+		align-items: center
+		justify-content: center
+		// background: rgba(21, 21, 21, 0.9)
+		opacity: 0.9
+		i
+			font-size: 60px
+			margin: 0 auto
+	.owl-prev
+		left: 0
+		padding-right: 10px
+	.owl-next
+		right: 0
+		padding-left: 10px
+
+@media(min-width: 300px) and (max-width: 699px)
+	.toggle-close
+		display: block
+	.owl-nav
+		display: none
+
+// --- END OF TITLES-CAROUSELS ----
+
+// @media(max-width: 700px)
+	// .carousel-item.selected
+		// margin-left: -20px
+
+// ------------------- VIDEO PLAYER ---------------------------------
+#video-player
+	margin-top: 20px
+
+.player
+	max-width: 80vw
+	margin:  auto
+	width: 100%
+	position: relative
+	// top: 2rem
+
+	video
+		width: 100%
+		height: 100%
+
+	.player-controls
+		width: 100%
+		display: flex
+		min-height: 50px
+		background: $black
+		align-items: center
+		position: absolute
+		bottom: -45px
+		left: 0
+		right: 0
+		z-index: 2147483647
+		justify-content: space-between
+
+	.btn-toggle-play
+		max-width: 5%
+		width: 100%
+		margin-left: 20px
+		margin-right: 20px
+	.seek-slider
+		max-width: 65%
+		width: 100%
+		margin-right: 10px
+	.time
+		max-width: 10%
+		width: 100%
+		margin-right: 20px
+	.btn-toggle-mute
+		max-width: 5%
+		width: 100%
+		margin-right: 5px
+	.volume-slider
+		max-width: 6%
+		width: 100%
+		margin-right: 10px
+	.btn-toggle-fullscreen
+		max-width: 5%
+		width: 100%
+		margin-right: 20px
+	button:focus
+		outline: none
+
+	input[type="range"]
+		appearance: none
+		background: $white
+		height: 10px
+		border-radius: 2px
+		&:focus
+			outline: none
+
+	/* Special styling for WebKit/Blink */
+	input[type=range]::-webkit-slider-thumb
+		-webkit-appearance: none
+		height: 15px
+		width: 15px
+		background: $green
+		border-radius: 100%
+		cursor: pointer
+		/* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+		margin-top: -2px
+
+	/* All the same stuff for Firefox */
+	input[type=range]::-moz-range-thumb
+		height: 15px
+		width: 15px
+		background: $green
+		border-radius: 100%
+		cursor: pointer
+
+	/* All the same stuff for IE */
+	input[type=range]::-ms-thumb
+		height: 15px
+		width: 15px
+		background: $green
+		border-radius: 100%
+		cursor: pointer
+
+	input[type=range]
+		&::-webkit-slider-runnable-track
+			height: 10px
+			cursor: pointer
+			background: $white
+		&:focus::-webkit-slider-runnable-track
+			background: $white
+		&::-moz-range-track
+			background: $white
+			height: 10px
+			cursor: pointer
+		&::-ms-track
+			height: 10px
+			background: $white
+			cursor: pointer
+			color: transparent
+
+	// --- ICONS AND LOGOS ---
+	.icon
+		height: 35px
+		width: 35px
+		background-size: cover
+		border: none
+		background-color: transparent
+		cursor: pointer
+
+	.icon-play
+		background-image: url("../img/video-controls/play.svg")
+		// background-image: linear-gradient(transparent, transparent), url("../img/video-controls/play.svg")
+
+	.icon-pause
+		background-image: url("../img/video-controls/pause.svg")
+
+	.icon-fullscreen
+		background-image: url("../img/video-controls/fullscreen.svg")
+
+	.icon-volume-on
+		background-image: url("../img/video-controls/volume-on.svg")
+
+	.icon-volume-off
+		background-image: url("../img/video-controls/volume-off.svg")
+
+// Hide native controls in full screen mode
+video::-webkit-media-controls-enclosure
+	display: none
+
+.player.full-screen-active
+	max-width: 100vw
+	height: 100%
+	background: #010001
+	margin: 0
+	.player-controls
+		// bottom: 50px
+		bottom: -45px
+		transition: bottom 0.3s ease-in-out
+		// transform: translateY(100%) translateY(-5px)
+
+	.player-controls.show
+		bottom: 0
+		transition: bottom 0.3s ease-in-out
+
+@media(max-width: 1200px)
+	.player
+		max-width: 90vw
+
+@media(max-width: 1000px)
+	.player
+		max-width: 100vw
+
+@media(max-width: 1125px)
+	.player
+		.btn-toggle-play
+			// max-width: 7%
+		.seek-slider
+			max-width: 55%
+		.time
+			max-width: 15%
+		.btn-toggle-mute
+			// max-width: 7%
+		.volume-slider
+			// max-width: 7%
+		.btn-toggle-fullscreen
+			// max-width: 7%
+
+@media(max-width: 820px)
+	.player
+		.btn-toggle-play
+			// max-width: 7%
+		.seek-slider
+			max-width: 50%
+		.time
+			max-width: 15%
+		.btn-toggle-mute
+			// max-width: 7%
+		.volume-slider
+			max-width: 8%
+		.btn-toggle-fullscreen
+			// max-width: 7%
+
+@media(max-width: 650px)
+	.player
+		.btn-toggle-play
+			max-width: 7%
+			margin-left: 10px
+			margin-right: 0
+		.seek-slider
+			max-width: 40%
+			margin-right: 0
+		.time
+			max-width: 20%
+			margin-right: 0
+		.btn-toggle-mute
+			max-width: 7%
+			margin-right: 0
+		.volume-slider
+			max-width: 10%
+			margin-right: 0
+		.btn-toggle-fullscreen
+			max-width: 7%
+			margin-right: 10px
+
+@media(max-width: 480px)
+	.player
+		.btn-toggle-play
+			max-width: 9%
+			margin-left: 10px
+			margin-right: 0
+		.seek-slider
+			max-width: 70%
+			margin-right: 0
+		.time
+			display: none
+		.btn-toggle-mute
+			display: none
+		.volume-slider
+			display: none
+		.btn-toggle-fullscreen
+			max-width: 9%
+			margin-right: 10px
+
+// -------- SUGGESTIONS SECTION UNDER THE VIDEO PLAYER --------------
+.suggestions
+	margin-top: calc(2rem + 45px)
+	h2
+		display: block
+		max-width: 80vw
+		margin-left: auto
+		margin-right: auto
+
+@media(max-width: 1200px)
+	.suggestions h2
+		max-width: 90vw
+
+@media(max-width: 1000px)
+	.suggestions h2
+		max-width: 100vw
